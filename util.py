@@ -1,5 +1,26 @@
 import json
+import random
+import math
+
 import pandas as pd
+
+
+class ColumnRandomizer:
+
+    def __init__(self):
+        self.used_values = set()
+
+    def randomizer(self, cell):
+
+        if not pd.isnull(cell):
+            return cell
+        else:
+            x = None
+            while x is None or x in self.used_values:
+                x = math.floor(random.random()*1000000)
+
+            return x
+
 
 def calculate_lat(row):
     if not pd.isnull(row["LAT"]):
@@ -31,3 +52,6 @@ def get_ospool_project_institutions() -> set:
             ospool_institutions.add(value['Organization'])
 
     return ospool_institutions
+
+def first(x):
+    return x[0]
